@@ -8,13 +8,19 @@
 
 $(document).ready(function() {
 	var audios = JSON.parse('<%=raw(@audios.to_json)%>')
-	console.log(audios)
-  jQuery(document).on("keydown", function(e) {
+	var sounds = {}
+	for(key in audios){
+		sounds[key] = new Audio(audios[key])
+	}
+	
+	$("body").on("keydown", function(e) {
 		var index = e.which
-		var sound = document.createElement('audio')
-		sound.src = audios[index]
+		var sound = sounds[index]
+		if (!sound.ended){sound.currentTime = 0}
 		sound.play()
-		sound.remove()
 	})
 })
 </script>
+
+<div id="main">
+</div>
