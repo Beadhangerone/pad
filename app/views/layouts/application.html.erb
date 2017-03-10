@@ -10,8 +10,10 @@
 
   <body>
   	<form> 
-	  	<select>
-	  		<option>Memory</option>
+	  	<select onchange="this.form.submit()" name="presset">
+        <option>Choose the presset</option>
+	  		<option value='sails'>Sails</option>
+        <option value='memory'>Memory</option>
 	  	</select>
   	</form>
     <%= yield %>
