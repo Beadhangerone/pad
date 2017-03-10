@@ -1,0 +1,20 @@
+<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous">
+</script>
+
+<script>
+
+$(document).ready(function() {
+	var audios = JSON.parse('<%=raw(@audios.to_json)%>')
+	console.log(audios)
+  jQuery(document).on("keydown", function(e) {
+		var index = e.which
+		var sound = document.createElement('audio')
+		sound.src = audios[index]
+		sound.play()
+		sound.remove()
+	})
+})
+</script>
