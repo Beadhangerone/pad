@@ -5,7 +5,7 @@
 </script>
 
 <script>
-	var debug = (x) => {console.log(x)}
+var debug = (x)=>console.log(x)
 $(document).ready(function() {
 
 	function parseSounds(){
@@ -26,11 +26,29 @@ $(document).ready(function() {
 
 		var nodes = {}
 		for (key in sounds){
-			// nodes[key] = AudioContext.createMediaElementSource(sounds[key])
 			nodes[key] = new MediaElementAudioSourceNode(audCtx, { mediaElement: sounds[key] })
 		}
 		connectNodes()
 		return nodes
+	}
+
+	function downloadLink(){
+		rec.exportWAV(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var li = document.createElement('li');
+      var au = document.createElement('audio');
+      var hf = document.createElement('a');
+      var reclist = $('#reclist')
+      
+      au.controls = true;
+      au.src = url;
+      hf.href = url;
+      hf.download = new Date().toISOString() + '.wav';
+      hf.innerHTML = hf.download;
+      li.append(au);
+      li.append(hf);
+      reclist.append(li);
+    });
 	}
 
 //---------------------------------------
@@ -55,19 +73,8 @@ $(document).ready(function() {
 			$(this).css('color', 'black')
 			rec.stop()
 			debug('STOP')
+			downloadLink()
 		}
-	})
-
-	$('#play').on('click', function(){
-		rec.getBuffer(function( buffers ) {
-	    var newSource = audCtx.createBufferSource();
-	    var newBuffer = audCtx.createBuffer( 2, buffers[0].length, audCtx.sampleRate );
-	    newBuffer.getChannelData(0).set(buffers[0]);
-	    newBuffer.getChannelData(1).set(buffers[1]);
-	    newSource.buffer = newBuffer;
-	    newSource.connect( audCtx.destination );
-	    newSource.start(0);
-		})
 	})
 
 	$("body").on("keydown", function(e) {
@@ -81,4 +88,4 @@ $(document).ready(function() {
 
 <h1>memory</h1>
 <button id='rec' recording='n'>Rec</button>
-<button id='play'>Play</button>
+<div id="reclist"></div>
