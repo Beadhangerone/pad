@@ -1,25 +1,3 @@
-<script
-  src="https://code.jquery.com/jquery-3.1.1.js"
-  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-  crossorigin="anonymous">
-</script>
-
-<script>
-
-$(document).ready(function() {
-	var audios = JSON.parse('<%=raw(@audios.to_json)%>')
-	var sounds = {}
-	for(key in audios){
-		sounds[key] = new Audio(audios[key])
-	}
-
-	$("body").on("keydown", function(e) {
-		var index = e.which
-		var sound = sounds[index]
-		if (!sound.ended){sound.currentTime = 0}
-		sound.play()
-	})
-})
-</script>
-
 <h1>Sails</h1>
+<button id='rec' recording='n'>Rec</button>
+<div id="reclist"></div>

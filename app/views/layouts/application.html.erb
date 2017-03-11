@@ -6,6 +6,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.js"
+      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+      crossorigin="anonymous">
+    </script>
+    <script>  
+      function parseSounds(){
+        var audios = JSON.parse('<%=raw(@audios.to_json)%>')
+        var sounds = {}
+        for(key in audios){
+          sounds[key] = new Audio(audios[key])
+        }
+        return sounds
+      }
+    </script>
   </head>
 
   <body>
