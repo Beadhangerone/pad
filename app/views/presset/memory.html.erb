@@ -7,11 +7,41 @@
 <script>
 
 $(document).ready(function() {
-	var audios = JSON.parse('<%=raw(@audios.to_json)%>')
-	var sounds = {}
-	for(key in audios){
-		sounds[key] = new Audio(audios[key])
+
+	function parseSounds(){
+		var audios = JSON.parse('<%=raw(@audios.to_json)%>')
+		var sounds = {}
+		for(key in audios){
+			sounds[key] = new Audio(audios[key])
+		}
+		return sounds
 	}
+
+	function setNodes(){
+		function connectNodes(){
+			for(key in nodes){
+				nodes[key].connect(mainNode)		
+			}
+		}
+
+		var nodes = {}
+		for (key in sounds){
+			// nodes[key] = AudioContext.createMediaElementSource(sounds[key])
+			nodes[key] = new MediaElementAudioSourceNode(audCtx, { mediaElement: sounds[key] })
+		}
+		connectNodes()
+		return nodes
+	}
+
+//---------------------------------------
+
+	var audCtx = new AudioContext()
+	var sounds = parseSounds()
+	var mainNode = new ChannelMergerNode(audCtx, {numberOfInputs: sounds.length});
+	mainNode.connect(audCtx.destination)
+	var nodes = setNodes()
+
+// --------------------------------------
 
 	$("body").on("keydown", function(e) {
 		var index = e.which
