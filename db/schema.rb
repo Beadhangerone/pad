@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319070545) do
+ActiveRecord::Schema.define(version: 20170319080516) do
 
   create_table "pressets", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sounds", force: :cascade do |t|
+    t.integer  "presset_id"
+    t.integer  "key"
+    t.string   "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presset_id"], name: "index_sounds_on_presset_id"
   end
 
 end

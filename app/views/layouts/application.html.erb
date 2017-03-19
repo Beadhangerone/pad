@@ -3,7 +3,6 @@
   <head>
     <title>Pad</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script
@@ -11,26 +10,18 @@
       integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
       crossorigin="anonymous">
     </script>
-    <script>  
-      function parseSounds(){
-        var audios = JSON.parse('<%=raw(@audios.to_json)%>')
-        var sounds = {}
-        for(key in audios){
-          sounds[key] = new Audio(audios[key])
-        }
-        return sounds
-      }
-    </script>
   </head>
 
   <body>
-  	<form> 
-	  	<select onchange="this.form.submit()" name="presset">
+    <form> 
+      <select onchange="this.form.submit()" name="presset">
         <option>Choose the presset</option>
-	  		<option value='sails'>Sails</option>
+        <option value='sails'>Sails</option>
         <option value='memory'>Memory</option>
-	  	</select>
-  	</form>
+      </select>
+    </form><br>
+    <button id='rec' recording='n'>Rec</button>
+    <div id="reclist"></div>
     <%= yield %>
   </body>
 </html>

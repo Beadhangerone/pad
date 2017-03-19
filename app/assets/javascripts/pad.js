@@ -1,5 +1,13 @@
-var c_log = (x)=>console.log(x)
+var c_log=(x)=>console.log(x)
 $(document).ready(function() {
+
+	function parseSounds(audios){
+    var sounds = {}
+    for(key in audios){
+      sounds[key] = new Audio(audios[key])
+    }
+    return sounds
+  }
 
 	function setNodes(){
 		var nodes = {}
@@ -32,7 +40,7 @@ $(document).ready(function() {
 //------------init-----------------------
 
 	var audCtx = new AudioContext()
-	var sounds = parseSounds()
+	var sounds = parseSounds(audios)
 	var mainNode =  audCtx.createGain()
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
