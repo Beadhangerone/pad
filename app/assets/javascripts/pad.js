@@ -67,7 +67,16 @@ $(document).ready(function() {
 	$("body").on("keydown", function(e) {
 		var index = e.which
 		var sound = sounds[index]
-		sound.currentTime = 0
-		sound.play()
+		var key = $(`.key[data-key=${index}]`)
+		key.addClass('pressed')
+		if (sound){
+			sound.currentTime = 0
+			sound.play()
+		}
+		$(this).on("keyup", function(e){
+			var index = e.which
+			var key = $(`.key[data-key=${index}]`)
+			key.removeClass('pressed')
+		}) 
 	})
 })

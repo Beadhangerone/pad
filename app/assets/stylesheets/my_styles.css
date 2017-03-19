@@ -3,9 +3,12 @@
 	display: inline-block;
 	border: 5px solid black;
 	border-radius: 3px;
-	background: yellow;
+	background: lightgray;
 	width: 100px;
 	height: 70px;
+}
+.pressed{
+	background: lightgreen;
 }
 .offset{
 	display: inline-block;
