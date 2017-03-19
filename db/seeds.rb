@@ -37,9 +37,11 @@ memory_s = {
 pressets = Presset.create([{name: 'sails'}, {name: 'memory'}])
 
 sails_s.each do |key, value|
-	pressets[0].sounds.create({key: key, source: value})
+	name = value.split('/').pop.split('.')[0]
+	pressets[0].sounds.create({key: key, source: value, name: name})
 end
 
 memory_s.each do |key, value|
-	pressets[1].sounds.create({key: key, source: value})
+	name = value.split('/').pop.split('.')[0]
+	pressets[1].sounds.create({key: key, source: value, name: name})
 end

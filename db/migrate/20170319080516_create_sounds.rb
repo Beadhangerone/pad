@@ -4,6 +4,7 @@ class CreateSounds < ActiveRecord::Migration[5.0]
     	t.belongs_to :presset, index: true
     	t.integer :key
     	t.string :source
+    	t.string :name
       t.timestamps
     end
   end

@@ -6,6 +6,11 @@
 	<%if key=='z'%><div class='offset' style="width: 60px;"></div><%end%>
 	<div class="key" data-key='<%=wich%>'>
 		<%=key%>
+		<%@presset.sounds.each do |s|%>
+			<%if (s.key==wich.to_i)%>
+				<b><%=s.name%></b>
+			<%end%>
+		<%end%>
 	</div>
 	<%if key=='p' or key=='l' or key=='m'%> 
 		<br> 

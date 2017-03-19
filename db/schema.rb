@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170319080516) do
     t.integer  "presset_id"
     t.integer  "key"
     t.string   "source"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["presset_id"], name: "index_sounds_on_presset_id"
