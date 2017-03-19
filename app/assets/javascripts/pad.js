@@ -2,36 +2,30 @@ var c_log = (x)=>console.log(x)
 $(document).ready(function() {
 
 	function setNodes(){
-		function connectNodes(){
-			for(key in nodes){
-				nodes[key].connect(mainNode)		
-			}
-		}
-
 		var nodes = {}
 		for (key in sounds){
 			nodes[key] = new MediaElementAudioSourceNode(audCtx, { mediaElement: sounds[key] })
+			nodes[key].connect(mainNode)
 		}
-		connectNodes()
 		return nodes
 	}
 
 	function downloadLink(){
 		rec.exportWAV(function(blob) {
       var url = URL.createObjectURL(blob);
-      var li = document.createElement('li');
-      var au = document.createElement('audio');
-      var hf = document.createElement('a');
+      var div = document.createElement('div');
+      var audio = document.createElement('audio');
+      var href = document.createElement('a');
       var reclist = $('#reclist')
       
-      au.controls = true;
-      au.src = url;
-      hf.href = url;
-      hf.download = new Date().toISOString() + '.wav';
-      hf.innerHTML = hf.download;
-      li.append(au);
-      li.append(hf);
-      reclist.append(li);
+      audio.controls = true;
+      audio.src = url;
+      href.href = url;
+      href.download = new Date().toISOString() + '.wav';
+      href.innerHTML = href.download;
+      div.append(audio);
+      div.append(href);
+      reclist.append(div);
     });
 	}
 

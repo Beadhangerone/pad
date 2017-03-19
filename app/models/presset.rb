@@ -1,0 +1,2 @@
+class Presset < ApplicationRecord
+end
