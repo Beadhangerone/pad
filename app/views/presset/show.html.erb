@@ -1,2 +1,14 @@
 <script>window.audios = <%=raw @audios.to_json%></script>
-<%=@presset.name%>
+<%=@presset.name%><br>
+
+<%$keys.each do |wich, key|%>
+	<%if key=='a'%><div class='offset' style="width: 30px;"></div><%end%>
+	<%if key=='z'%><div class='offset' style="width: 60px;"></div><%end%>
+	<div class="key">
+		<%=key%>
+	</div>
+	<%if key=='p' or key=='l' or key=='m'%> 
+		<br> 
+	<%end%>
+
+<%end%>

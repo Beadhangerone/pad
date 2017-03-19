@@ -1,0 +1,12 @@
+.key {
+	margin: 4px 3px;
+	display: inline-block;
+	border: 5px solid black;
+	border-radius: 3px;
+	background: yellow;
+	width: 100px;
+	height: 70px;
+}
+.offset{
+	display: inline-block;
+}
