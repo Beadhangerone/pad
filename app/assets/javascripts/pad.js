@@ -68,8 +68,8 @@ $(document).ready(function() {
 		var index = e.which
 		var sound = sounds[index]
 		var key = $(`.key[data-key=${index}]`)
-		key.addClass('pressed')
-		if (sound){
+		if (sound && !key.hasClass('pressed')){
+			key.addClass('pressed')
 			sound.currentTime = 0
 			sound.play()
 		}
