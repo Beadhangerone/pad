@@ -2,25 +2,38 @@
 	font-family: chunk-five;
 	src: url(/fonts/Chunkfive.otf);
 }
+@font-face{
+	font-family: big-noodle;
+	src: url(/fonts/Bignoodle.ttf);
+}
 
 .chunk{
 	font-family: chunk-five;
 }
+.noodle{
+	font-family: big-noodle;
+}
 
 body{
-	background: #31353C
+	background: #31353C;
 }
+
+#presset-name{
+	font-size: 50px;
+	color: #b9bdc5;
+}
+
 .key {
 	margin: 4px 3px;
 	display: inline-block;
-	border: 5px solid #676e7e;
+	border: 5px solid #6b717b;
 	border-radius: 3px;
-	background: #abafba;
+	background: #b9bdc5;
 	width: 100px;
 	height: 70px;
-	-webkit-box-shadow: inset 0px 0px 50px 15px rgba(0,0,0,0.3);
-	-moz-box-shadow: inset 0px 0px 50px 15px rgba(0,0,0,0.3);
-	box-shadow: inset 0px 0px 50px 15px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0px 0px 45px 20px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0px 0px 45px 20px rgba(0,0,0,0.3);
+	box-shadow: inset 0px 0px 45px 20px rgba(0,0,0,0.3);
 }
 .key>.char{
 	font-size: 30px;
@@ -28,17 +41,13 @@ body{
 	left: 10px;
 }
 .key>.sound{
-	font-size: 20px;
+	font-size: 25px;
 	position: relative;
-	top:35px;
-	/*margin: auto;*/
+	top:40px;
 }
 .pressed{
-	background: #E1E126;
-	border-color: #808000;
-	-webkit-box-shadow: inset 0px 0px 50px 15px rgba(0,0,0,0.3);
-	-moz-box-shadow: inset 0px 0px 50px 15px rgba(0,0,0,0.3);
-	box-shadow: inset 0px 0px 50px 15px rgba(0,0,0,0.3);
+	background: #f1d519;
+	border-color: #7B6D02;
 }
 .offset{
 	display: inline-block;

@@ -1,5 +1,5 @@
 <script>window.audios = <%=raw @audios.to_json%></script>
-<%=@presset.name%><br>
+<center><span id="presset-name"><%=@presset.name%></span></center><br>
 
 <%$keys.each do |wich, key|%>
 	<%if key=='a'%><div class='offset' style="width: 30px;"></div><%end%>
@@ -8,7 +8,7 @@
 		<span class="chunk char"><%=key.capitalize%></span>
 		<%@presset.sounds.each do |s|%>
 			<%if (s.key==wich.to_i)%>
-				<span class="sound"><b><%=s.name%></b></span>
+				<span class="noodle sound"><b><%=s.name%></b></span>
 			<%end%>
 		<%end%>
 	</div>
