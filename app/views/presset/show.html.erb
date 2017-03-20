@@ -5,10 +5,10 @@
 	<%if key=='a'%><div class='offset' style="width: 30px;"></div><%end%>
 	<%if key=='z'%><div class='offset' style="width: 60px;"></div><%end%>
 	<div class="key" data-key='<%=wich%>'>
-		<%=key%>
+		<span class="chunk char"><%=key.capitalize%></span>
 		<%@presset.sounds.each do |s|%>
 			<%if (s.key==wich.to_i)%>
-				<b><%=s.name%></b>
+				<span class="sound"><b><%=s.name%></b></span>
 			<%end%>
 		<%end%>
 	</div>
