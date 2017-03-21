@@ -1,5 +1,5 @@
 class PressetController < ApplicationController
-	before_action :check_presset
+	before_action :check_if_presset
 
 	$keys = {
 		81 => 'q', 87 => 'w', 69 => 'e', 82 => 'r', 84 => 't', 89 => 'y', 85 => 'u', 73 => 'i', 79 => 'o', 80 => 'p',
@@ -17,9 +17,10 @@ class PressetController < ApplicationController
 
 	private
 
-	def check_presset
+		def check_if_presset
 		presset = params[:presset]
 		redirect_to presset_show_path(presset) if presset
+		@pressets = Presset.all
 	end
 
 end

@@ -68,10 +68,12 @@ $(document).ready(function() {
 		var index = e.which
 		var sound = sounds[index]
 		var key = $(`.key[data-key=${index}]`)
-		if (sound && !key.hasClass('pressed')){
+		if (!key.hasClass('pressed')){
 			key.addClass('pressed')
-			sound.currentTime = 0
-			sound.play()
+			if (sound){
+				sound.currentTime = 0
+				sound.play()
+			}
 		}
 		$(this).on("keyup", function(e){
 			var index = e.which

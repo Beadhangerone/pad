@@ -13,15 +13,32 @@
   </head>
 
   <body>
-    <form> 
-      <select onchange="this.form.submit()" name="presset">
-        <option>Choose the presset</option>
-        <option value='sails'>Sails</option>
-        <option value='memory'>Memory</option>
-      </select>
-    </form><br>
-    <button id='rec' recording='n'>Rec</button>
-    <%= yield %>
-    <div id="reclist"></div>
+    <div id="nav-bar" class="noodle">
+      <div class="nav-item logo">
+        
+          <span><a href="/">Main Page</a></span>
+      </div>
+      <div class="nav-item">
+          <div class="lamp"></div><span><a href="/#">Pressets</a></span>
+      </div>
+      <div class="nav-item">
+          <div class="lamp"></div><span><a href="/#">Songs</a></span>
+      </div>
+    </div>
+    <div class="container">
+      <form> 
+        <select onchange="this.form.submit()" name="presset">
+          <option>Choose the presset</option>
+          <%@pressets.each do |presset|%>
+            
+            <option value='<%=presset.name%>'><%=presset.name.capitalize%></option>
+
+          <%end%>
+        </select>
+      </form><br>
+      <button id='rec' recording='n'>Rec</button>
+      <%= yield %>
+      <div id="reclist"></div>
+    </div>
   </body>
 </html>

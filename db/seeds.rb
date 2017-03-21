@@ -33,8 +33,22 @@ memory_s = {
 	82 => '/sounds/memory/wab3.wav',
 	69 => '/sounds/memory/wab4.wav',
 }
+alcatraz_s = {
+	77 => '/sounds/alcatraz/kick.wav',
+	75 => '/sounds/alcatraz/hat.wav',
+	79 => '/sounds/alcatraz/snare.wav',
+	72 => '/sounds/alcatraz/guitar2.wav',
+	78 => '/sounds/alcatraz/guitar1.wav',
+	66 => '/sounds/alcatraz/pad1.wav',
+	71 => '/sounds/alcatraz/pad2.wav',
+	84 => '/sounds/alcatraz/pad3.wav',
+	86 => '/sounds/alcatraz/piano1.wav',
+	70 => '/sounds/alcatraz/piano2.wav',
+	82 => '/sounds/alcatraz/riff1.wav',
+	69 => '/sounds/alcatraz/riff2.wav',
+}
 
-pressets = Presset.create([{name: 'sails'}, {name: 'memory'}])
+pressets = Presset.create([{name: 'sails'}, {name: 'memory'}, {name: 'alcatraz'}])
 
 sails_s.each do |key, value|
 	name = value.split('/').pop.split('.')[0]
@@ -44,4 +58,9 @@ end
 memory_s.each do |key, value|
 	name = value.split('/').pop.split('.')[0]
 	pressets[1].sounds.create({key: key, source: value, name: name})
+end
+
+alcatraz_s.each do |key, value|
+	name = value.split('/').pop.split('.')[0]
+	pressets[2].sounds.create({key: key, source: value, name: name})
 end
