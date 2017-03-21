@@ -1,4 +1,7 @@
-<script>window.audios = <%=raw @audios.to_json%></script>
+<script>window.audios = <%=raw @audios.to_json%>
+	console.log(audios)
+</script>
+<script src="/scripts/pad.js"></script>
 <center><span id="presset-name"><%=@presset.name%></span></center><br>
 
 <%$keys.each do |wich, key|%>

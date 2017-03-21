@@ -1,5 +1,5 @@
 class PressetController < ApplicationController
-	before_action :check_if_presset
+	# before_action :check_if_presset
 
 	$keys = {
 		81 => 'q', 87 => 'w', 69 => 'e', 82 => 'r', 84 => 't', 89 => 'y', 85 => 'u', 73 => 'i', 79 => 'o', 80 => 'p',
@@ -7,8 +7,13 @@ class PressetController < ApplicationController
 		90 => 'z', 88 => 'x', 67 => 'c', 86 => 'v', 66 => 'b', 78 => 'n', 77 => 'm',
 	}
 
+	def all
+		@pressets = Presset.all
+	end
+
 	def show
-		@presset = Presset.where(name: params[:name]).take
+		name = params[:name]
+		@presset = Presset.where(name: name).take
 		@audios = {}
 		@presset.sounds.each do |sound|
 			@audios[sound.key] = sound.source
@@ -17,10 +22,10 @@ class PressetController < ApplicationController
 
 	private
 
-		def check_if_presset
-		presset = params[:presset]
-		redirect_to presset_show_path(presset) if presset
-		@pressets = Presset.all
-	end
+	# def check_if_presset
+	# 	presset = params[:presset]
+	# 	redirect_to presset_show_path(presset) if presset
+	# 	
+	# end
 
 end

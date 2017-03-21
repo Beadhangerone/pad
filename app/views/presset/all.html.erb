@@ -1,0 +1,5 @@
+<h1>all pressets</h1>
+
+<%@pressets.each do |presset|%>
+	<a href="<%=presset_show_path("#{presset.name}")%>"><%=presset.name%></a><br>
+<%end%>
