@@ -1,22 +1,22 @@
-<script>window.audios = <%=raw @audios.to_json%>
-	console.log(audios)
-</script>
+<script>window.audios = <%=raw @audios.to_json%></script>
 <script src="/scripts/pad.js"></script>
+<button id='rec' recording='n'>Rec</button>
 <center><span id="presset-name"><%=@presset.name%></span></center><br>
 
-<%$keys.each do |wich, key|%>
-	<%if key=='a'%><div class='offset' style="width: 30px;"></div><%end%>
-	<%if key=='z'%><div class='offset' style="width: 60px;"></div><%end%>
-	<div class="key" data-key='<%=wich%>'>
-		<span class="chunk char"><%=key.capitalize%></span>
-		<%@presset.sounds.each do |s|%>
-			<%if (s.key==wich.to_i)%>
-				<span class="noodle sound"><b><%=s.name%></b></span>
+<div class="black-text-color keyboard">
+	<%$keys.each do |wich, key|%>
+		<%if key=='a'%><div class='offset' style="width: 30px;"></div><%end%>
+		<%if key=='z'%><div class='offset' style="width: 60px;"></div><%end%>
+		<div class="key" data-key='<%=wich%>'>
+			<span class="chunk char"><%=key.capitalize%></span>
+			<%@presset.sounds.each do |s|%>
+				<%if (s.key==wich.to_i)%>
+					<span class="noodle sound"><b><%=s.name%></b></span>
+				<%end%>
 			<%end%>
+		</div>
+		<%if key=='p' or key=='l' or key=='m'%> 
+			<br> 
 		<%end%>
-	</div>
-	<%if key=='p' or key=='l' or key=='m'%> 
-		<br> 
 	<%end%>
-
-<%end%>
+</div>
