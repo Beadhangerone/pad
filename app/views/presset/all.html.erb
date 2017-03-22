@@ -1,5 +1,9 @@
 <h1>all pressets</h1>
 
 <%@pressets.each do |presset|%>
-	<a href="<%=presset_show_path("#{presset.name}")%>"><%=presset.name%></a><br>
+	<a href="<%=presset_show_path("#{presset.name}")%>">
+		<%=presset.name.capitalize%>
+		<span style="margin-left: 20px;"><%=presset.genre%></span>
+	</a>
+	<br>
 <%end%>

@@ -6,7 +6,6 @@ $(document).ready(function() {
     for(key in audios){
       sounds[key] = new Audio(audios[key])
     }
-    c_log('parseSounds')
     return sounds
   }
 
@@ -16,7 +15,6 @@ $(document).ready(function() {
 			nodes[key] = new MediaElementAudioSourceNode(audCtx, { mediaElement: sounds[key] })
 			nodes[key].connect(mainNode)
 		}
-		c_log('setNodes')
 		return nodes
 	}
 

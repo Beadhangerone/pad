@@ -48,7 +48,7 @@ alcatraz_s = {
 	69 => '/sounds/alcatraz/riff2.wav',
 }
 
-pressets = Presset.create([{name: 'sails'}, {name: 'memory'}, {name: 'alcatraz'}])
+pressets = Presset.create([{name:'sails',genre:'dubstep'},{name:'memory',genre:'piano'},{name:'alcatraz',genre:'trap'}])
 
 sails_s.each do |key, value|
 	name = value.split('/').pop.split('.')[0]
