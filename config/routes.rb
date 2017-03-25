@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'home#index'
 
   get '/presset/:name'=> 'presset#show', as: 'presset_show'

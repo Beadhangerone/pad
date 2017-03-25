@@ -47,8 +47,22 @@ alcatraz_s = {
 	82 => '/sounds/alcatraz/riff1.wav',
 	69 => '/sounds/alcatraz/riff2.wav',
 }
+wox_s = {
+	77 => '/sounds/wox/kick.wav',
+	75 => '/sounds/wox/hat.wav',
+	79 => '/sounds/wox/snare.wav',
+	86 => '/sounds/wox/crash.wav',
+	72 => '/sounds/wox/vox_I.wav',
+	78 => '/sounds/wox/vox_bird.wav',
+	66 => '/sounds/wox/pad1.wav',
+	71 => '/sounds/wox/pad2.wav',
+	84 => '/sounds/wox/pad3.wav',
+	# 70 => '/sounds/wox/piano2.wav',
+	82 => '/sounds/wox/riff.wav',
+	# 69 => '/sounds/wox/riff2.wav',
+}
 
-pressets = Presset.create([{name:'sails',genre:'dubstep'},{name:'memory',genre:'piano'},{name:'alcatraz',genre:'trap'}])
+pressets = Presset.create([{name:'sails',genre:'dubstep'},{name:'memory',genre:'piano'},{name:'alcatraz',genre:'trap'}, {name: 'wox', genre:'trap'}])
 
 sails_s.each do |key, value|
 	name = value.split('/').pop.split('.')[0]
@@ -63,4 +77,9 @@ end
 alcatraz_s.each do |key, value|
 	name = value.split('/').pop.split('.')[0]
 	pressets[2].sounds.create({key: key, source: value, name: name})
+end
+
+wox_s.each do |key, value|
+	name = value.split('/').pop.split('.')[0]
+	pressets[3].sounds.create({key: key, source: value, name: name})
 end
