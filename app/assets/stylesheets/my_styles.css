@@ -39,22 +39,21 @@ a{
 	height: 60px;
 	background: #b9bdc5;
 	color: #2b2f3b;
+	padding: 0px 20px;
+	padding-top: 10px;
 }
 #nav-bar>.nav-item{
+	padding-top: 4px;
 	font-size: 20px;
 	display: inline-block;
 }
-.nav-item+.nav-item{
-	padding-left: 100px; 
-}
-.nav-item>span{
-	position: relative;
-	top: 17px;
-}
+.sign-item{padding-left: 0px;}
+.sign-item+.sign-item{padding-right: 50px;}
+.nav-item+.nav-item{padding-left: 100px; }
 .nav-item>.lamp{
 	cursor: pointer;
 	position: relative;
-	top:15px;
+	bottom: 2px;
 	right: 5px;
 	background: #a6ff4d;
 	height: 10px;
@@ -62,14 +61,13 @@ a{
 	border-radius: 50px;
 	display: inline-block;
 }
-.nav-item>span:hover{
+/*.nav-item>span:hover{
 	cursor: pointer;
 	color: #4d4d4d;
-}
+}*/
 #nav-bar>.logo{
-	font-size: 27px; 
-	padding-left: 20px; 
-	height: 100%;
+	margin-right: 100px;
+	font-size: 27px;
 	width: 150px;
 }
 
@@ -96,9 +94,13 @@ a{
 	left: 10px;
 }
 .key>.sound{
+	display: inline-block;
 	font-size: 25px;
 	position: relative;
-	top:40px;
+	top:25px;
+}
+.sound>b{
+	margin: auto;
 }
 .pressed{
 	border-color: #59a50d;

@@ -25,7 +25,7 @@ $(document).ready(function() {
       var audio = document.createElement('audio');
       var href = document.createElement('a');
       var reclist = $('#reclist')
-      
+
       audio.controls = true;
       audio.src = url;
       href.href = url;
@@ -79,6 +79,6 @@ $(document).ready(function() {
 			var index = e.which
 			var key = $(`.key[data-key=${index}]`)
 			key.removeClass('pressed')
-		}) 
+		})
 	})
 })

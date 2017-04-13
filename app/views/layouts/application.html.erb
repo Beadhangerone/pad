@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- w3css -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- w3css -->
     <title>Pad</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,15 +18,20 @@
   
   <body>
     <div id="nav-bar" class="noodle">
-      <div class="nav-item logo">
-        
-          <span><a href="/">Main Page</a></span>
+      <div class="logo w3-left">      
+          <a href="/">Main Page</a>
       </div>
-      <div class="nav-item">
-          <div class="lamp"></div><span><a href="<%=all_pressets_path%>">Pressets</a></span>
+      <div class="nav-item w3-left">
+          <div class="lamp"></div><a href="<%=all_pressets_path%>">Pressets</a>
       </div>
-      <div class="nav-item">
-          <div class="lamp"></div><span><a href="/#">Songs</a></span>
+      <div class="nav-item w3-left">
+          <div class="lamp"></div><a href="/#">Songs</a>
+      </div>
+      <div class="sign-item nav-item w3-right">
+          <div class="lamp"></div><a href="/#">Sign in</a>
+      </div>
+      <div class="sign-item nav-item w3-right">
+          <div class="lamp"></div><a href="/#">Sign up</a>
       </div>
     </div>
     <div class="container">
