@@ -89,15 +89,17 @@ a{
 	height: 70px;
 }
 .key>.char{
-	font-size: 30px;
-	position: relative;
-	left: 10px;
-}
-.key>.sound{
-	display: inline-block;
 	font-size: 25px;
 	position: relative;
-	top:25px;
+	left: 5px;
+	bottom: 2px;
+}
+.key>.sound{
+	margin: auto;
+	display: inline-block;
+	font-size: 23px;
+	position: relative;
+	top:30px;
 }
 .sound>b{
 	margin: auto;

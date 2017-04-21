@@ -11,12 +11,12 @@
 			<span class="chunk char"><%=key.capitalize%></span>
 			<%@presset.sounds.each do |s|%>
 				<%if (s.key==wich.to_i)%>
-					<span class="noodle sound"><b><%=s.name%></b></span>
+					<center class="noodle sound"><b><%=s.name%></b></center>
 				<%end%>
 			<%end%>
 		</div>
-		<%if key=='p' or key=='l' or key=='m'%> 
-			<br> 
+		<%if key=='p' or key=='l' or key=='m'%>
+			<br>
 		<%end%>
 	<%end%>
 </div>

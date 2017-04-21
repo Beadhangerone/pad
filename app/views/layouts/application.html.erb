@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Pad</title>
     <!-- w3css -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- w3css -->
-    <title>Pad</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -15,10 +15,10 @@
       crossorigin="anonymous">
     </script>
   </head>
-  
+
   <body>
     <div id="nav-bar" class="noodle">
-      <div class="logo w3-left">      
+      <div class="logo w3-left">
           <a href="/">Main Page</a>
       </div>
       <div class="nav-item w3-left">
@@ -27,12 +27,19 @@
       <div class="nav-item w3-left">
           <div class="lamp"></div><a href="/#">Songs</a>
       </div>
-      <div class="sign-item nav-item w3-right">
-          <div class="lamp"></div><a href="/#">Sign in</a>
-      </div>
-      <div class="sign-item nav-item w3-right">
-          <div class="lamp"></div><a href="/#">Sign up</a>
-      </div>
+      <%if user_signed_in?%>
+        <div class="sign-item nav-item w3-right">
+          <div class="lamp"></div>
+          <a href="<%=destroy_user_session_path%>" data-method="delete">Sign out</a>
+        </div>
+      <%else%>
+        <div class="sign-item nav-item w3-right">
+            <div class="lamp"></div><a href="<%=new_user_session_path%>">Sign in</a>
+        </div>
+        <div class="sign-item nav-item w3-right">
+            <div class="lamp"></div><a href="<%=new_user_registration_path%>">Sign up</a>
+        </div>
+      <%end%>
     </div>
     <div class="container">
       <%if notice%><p class="notice"><%= notice %></p><%end%>
