@@ -18,7 +18,18 @@ $(document).ready(function() {
 		return nodes
 	}
 
-
+	function startRec(btn){
+		rec.clear()
+		rec.record()
+		btn.attr('recording', 'y')
+		btn.css('color', 'red')
+	}
+	function stopRec(btn){
+		rec.stop()
+		downloadLink()
+		btn.attr('recording', 'n')
+		btn.css('color', 'black')
+	}
 
 	function downloadLink(){
 		rec.exportWAV(function(blob) {
@@ -26,7 +37,6 @@ $(document).ready(function() {
 			var audio = $('<audio>');
 			audio.attr('controls', 'true')
 			audio.attr('src', url)
-
 
 			var btn = $('<button>');
 			btn.html('rec on it')
@@ -36,42 +46,35 @@ $(document).ready(function() {
 			// href.href = url;
 			// href.download = new Date().toISOString() + '.wav';
 			// href.innerHTML = href.download;
+			// div.append(href);
 
 			var div = $('<div>');
       div.append(audio);
 			div.append(btn);
+			var audio = div.find('audio')[0]
+			var sound = audCtx.createMediaElementSource(audio)
+			sound.connect(mainNode)
 			$('#reclist').append(div);
 
 			btn.on('click', function(){
-					// var btrack = audCtx.createMediaElementSource(audio)
-					var audio = div.find('audio')[0]
 					var recording = $(this).attr('recording')
 					if(recording == 'n'){
-						var sound = audCtx.createMediaElementSource(audio)
-						sound.connect(mainNode)
-						rec.clear()
-						sound.currentTime = 0;
-						rec.record()
-						audio.play()
-						btn.attr('recording', 'y')
-						btn.css('color', 'red')
+						audio.currentTime = 0;
+						audio.play();
+						startRec(btn)
 					}else if(recording == 'y'){
-						rec.stop()
+						stopRec(btn)
 						audio.pause()
-						downloadLink()
-						btn.attr('recording', 'n')
-						btn.css('color', 'black')
 					}
 			});
 
-      // div.append(href);
 		});
 	}
 
 //------------init-----------------------
 	if (!window.audCtx){window.audCtx = new AudioContext()}
 	var sounds = parseSounds(audios)
-	var mainNode =  audCtx.createGain()
+	var mainNode = audCtx.createGain()
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
 	var rec = new Recorder(mainNode)
