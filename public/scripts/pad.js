@@ -1,4 +1,4 @@
-var c_log=(x)=>console.log(x)
+var cLog=(x)=>console.log(x)
 $(document).ready(function() {
 
 	function parseSounds(audios){
@@ -18,23 +18,54 @@ $(document).ready(function() {
 		return nodes
 	}
 
+
+
 	function downloadLink(){
 		rec.exportWAV(function(blob) {
       var url = URL.createObjectURL(blob);
-      var div = document.createElement('div');
-      var audio = document.createElement('audio');
-      var href = document.createElement('a');
-      var reclist = $('#reclist')
+			var audio = $('<audio>');
+			audio.attr('controls', 'true')
+			audio.attr('src', url)
 
-      audio.controls = true;
-      audio.src = url;
-      href.href = url;
-      href.download = new Date().toISOString() + '.wav';
-      href.innerHTML = href.download;
+
+			var btn = $('<button>');
+			btn.html('rec on it')
+			btn.attr('recording', 'n')
+
+      // var href = document.createElement('a');
+			// href.href = url;
+			// href.download = new Date().toISOString() + '.wav';
+			// href.innerHTML = href.download;
+
+			var div = $('<div>');
       div.append(audio);
-      div.append(href);
-      reclist.append(div);
-    });
+			div.append(btn);
+			$('#reclist').append(div);
+
+			btn.on('click', function(){
+					// var btrack = audCtx.createMediaElementSource(audio)
+					var audio = div.find('audio')[0]
+					var recording = $(this).attr('recording')
+					if(recording == 'n'){
+						var sound = audCtx.createMediaElementSource(audio)
+						sound.connect(mainNode)
+						rec.clear()
+						sound.currentTime = 0;
+						rec.record()
+						audio.play()
+						btn.attr('recording', 'y')
+						btn.css('color', 'red')
+					}else if(recording == 'y'){
+						rec.stop()
+						audio.pause()
+						downloadLink()
+						btn.attr('recording', 'n')
+						btn.css('color', 'black')
+					}
+			});
+
+      // div.append(href);
+		});
 	}
 
 //------------init-----------------------
@@ -44,23 +75,21 @@ $(document).ready(function() {
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
 	var rec = new Recorder(mainNode)
-	console.log('init passed')
 
 // --------------------------------------
 
 	$("#rec").on('click', function(){
-		if($(this).attr('recording') == 'n'){
-			$(this).attr('recording', 'y')
-			$(this).css('color', 'red')
-			c_log('REC')
+		var recording = $(this).attr('recording')
+		if(recording == 'n'){
 			rec.clear()
 			rec.record()
-		}else if($(this).attr('recording') == 'y'){
+			$(this).attr('recording', 'y')
+			$(this).css('color', 'red')
+		}else if(recording == 'y'){
+			rec.stop()
+			downloadLink()
 			$(this).attr('recording', 'n')
 			$(this).css('color', 'black')
-			rec.stop()
-			c_log('STOP')
-			downloadLink()
 		}
 	})
 
