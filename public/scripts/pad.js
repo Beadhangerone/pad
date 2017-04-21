@@ -38,13 +38,13 @@ $(document).ready(function() {
 	}
 
 //------------init-----------------------
-
-	var audCtx = new AudioContext()
+	if (!window.audCtx){window.audCtx = new AudioContext()}
 	var sounds = parseSounds(audios)
 	var mainNode =  audCtx.createGain()
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
 	var rec = new Recorder(mainNode)
+	console.log('init passed')
 
 // --------------------------------------
 
