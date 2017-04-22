@@ -1,6 +1,7 @@
 var cLog=(x)=>console.log(x)
 $(document).ready(function() {
 
+
 	function parseSounds(audios){
     var sounds = {}
     for(key in audios){
@@ -30,46 +31,73 @@ $(document).ready(function() {
 		btn.attr('recording', 'n')
 		btn.css('color', 'black')
 	}
+	function recOnIt(e){
+		var btn = e.data.btn
+		var audio = e.data.audio
+		var recording = btn.attr('recording')
+		if(recording == 'n'){
+			audio.currentTime = 0
+			audio.play()
+			startRec(btn)
+		}else if(recording == 'y'){
+			stopRec(btn)
+			audio.pause()
+		}
+	}
+	function delRec(e){
+		var id = e.data.id
+		var div = e.data.div
+		cLog(`deleting`)
+		cLog(id)
+		div.remove()
+		for(var i in records){
+			if(records[i].id == id){
+				records.splice(i, 1)
+			}
+		}
+	}
 
-	function downloadLink(){
-		rec.exportWAV(function(blob) {
-      var url = URL.createObjectURL(blob);
-			var audio = $('<audio>');
+	class Record{
+		constructor(blob){
+			this.blob = URL.createObjectURL(blob)
+			// this.parent = parent
+			this.id = id++
+			this.time = new Date().toISOString()
+
+			var audio = $('<audio>')
 			audio.attr('controls', 'true')
-			audio.attr('src', url)
+			audio.attr('src', this.blob)
 
-			var btn = $('<button>');
-			btn.html('rec on it')
-			btn.attr('recording', 'n')
+			var roib = $('<button>')
+			roib.html('rec on it')
+			roib.attr('recording', 'n')
 
-      // var href = document.createElement('a');
-			// href.href = url;
-			// href.download = new Date().toISOString() + '.wav';
-			// href.innerHTML = href.download;
-			// div.append(href);
+			var delb = $('<i>')
+			delb.addClass('fa fa-times')
 
-			var div = $('<div>');
-      div.append(audio);
-			div.append(btn);
+			var div = $('<div>')
+			$(div).append( audio )
+			$(div).append( roib )
+			$(div).append(delb)
+			$('#reclist').append( div )
+
 			var audio = div.find('audio')[0]
 			var sound = audCtx.createMediaElementSource(audio)
 			sound.connect(mainNode)
-			$('#reclist').append(div);
 
-			btn.on('click', function(){
-					var recording = $(this).attr('recording')
-					if(recording == 'n'){
-						audio.currentTime = 0;
-						audio.play();
-						startRec(btn)
-					}else if(recording == 'y'){
-						stopRec(btn)
-						audio.pause()
-					}
-			});
+			roib.on('click', {btn:roib, audio:audio}, recOnIt)
+			delb.on('click', {id:this.id, div:div}, delRec)
 
-		});
+		}
 	}
+
+	function downloadLink(){
+		rec.exportWAV(function(blob) {
+			var newRec = new Record(blob)
+			records.push(newRec)
+		})
+	}
+
 
 //------------init-----------------------
 	if (!window.audCtx){window.audCtx = new AudioContext()}
@@ -78,21 +106,17 @@ $(document).ready(function() {
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
 	var rec = new Recorder(mainNode)
+	var records = []
+	var id = 1
 
 // --------------------------------------
 
 	$("#rec").on('click', function(){
 		var recording = $(this).attr('recording')
 		if(recording == 'n'){
-			rec.clear()
-			rec.record()
-			$(this).attr('recording', 'y')
-			$(this).css('color', 'red')
+			startRec( $(this) )
 		}else if(recording == 'y'){
-			rec.stop()
-			downloadLink()
-			$(this).attr('recording', 'n')
-			$(this).css('color', 'black')
+			stopRec( $(this) )
 		}
 	})
 
