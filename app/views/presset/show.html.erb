@@ -1,6 +1,5 @@
 <script>window.audios = <%=raw @audios.to_json%></script>
 <script src="/scripts/pad.js"></script>
-<button id='rec' recording='n'>Rec</button>
 <center><span id="presset-name"><%=@presset.name%></span></center><br>
 
 <div class="black-text-color keyboard">
@@ -20,3 +19,4 @@
 		<%end%>
 	<%end%>
 </div>
+<div id="reclist"></div>
