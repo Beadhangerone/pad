@@ -15,7 +15,12 @@ $(document).ready(function() {
 			db.transaction(function(tx) {
 				tx.executeSql(
 					"INSERT INTO Records (sound) values(?)", [data],
-					null, null
+					function(tx, results){
+                var id = results.insertId
+								var blob = base64ToBlob(data)
+								new Record(id, blob)
+            },
+						null
 				);
 			});
 		}
@@ -39,10 +44,18 @@ $(document).ready(function() {
 							var id = result.rows.item(i)['id']
 							var b64data = result.rows.item(i)['sound']
 							var blob = base64ToBlob(b64data)
-							var record = new Record(blob)
+							new Record(id, blob)
 						}
 					},
 					null
+				);
+			});
+		}
+		function DBdelRec(id){
+			db.transaction(function(tx) {
+				tx.executeSql(
+					"DELETE FROM Records WHERE id = ?", [id],
+					null,null
 				);
 			});
 		}
@@ -81,10 +94,11 @@ $(document).ready(function() {
 		var id = e.data.id
 		var div = e.data.div
 		div.remove()
+		DBdelRec(id)
 	}
 	function downloadLink(){
 		rec.exportWAV(function(blob) {
-			new Record(blob)
+
 			blobToBase64(blob)
 		});
 	}
@@ -141,9 +155,10 @@ $(document).ready(function() {
 	}
 
 	class Record{
-		constructor(blob){
-			var div = $('<div>')
+		constructor(id, blob){
+			this.id = id
 			this.blob = blob
+			var div = $('<div>')
 			var audio = new Aud(this.blob)
 			var roib = new RecBtn(audio)
 			var delb = new Delb(this.id, div)
