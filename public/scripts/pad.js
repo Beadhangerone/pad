@@ -60,6 +60,7 @@ $(document).ready(function() {
 			}
 			pushRec(){
 				var div = $('<div>')
+				div.addClass('record')
 				var audio = new Aud(this.blob)
 				var roib = new RecBtn(audio)
 				var delb = new Delb(this.id, div)
@@ -188,10 +189,12 @@ $(document).ready(function() {
 		btn.css('color', 'black')
 	}
 	function delRec(e){
-		var id = e.data.id
-		var div = e.data.div
-		div.remove()
-		DBdelRec(id)
+		if( confirm("Do You really want to delete this record?") ){
+			var id = e.data.id
+			var div = e.data.div
+			div.remove()
+			DBdelRec(id)
+		}
 	}
 	function downloadLink(){
 		rec.exportWAV(function(blob) {

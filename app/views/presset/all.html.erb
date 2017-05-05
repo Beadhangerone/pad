@@ -1,9 +1,11 @@
-<h1>all pressets</h1>
-
-<%@pressets.each do |presset|%>
-	<a href="<%=presset_show_path("#{presset.name}")%>">
-		<%=presset.name.capitalize%>
-		<span style="margin-left: 20px;"><%=presset.genre%></span>
-	</a>
-	<br>
-<%end%>
+<ul class="w3-ul w3-card-4">
+  <li><h2>Pressets</h2></li>
+	<%@pressets.each do |presset|%>
+		<li>
+			<a href="<%=presset_show_path("#{presset.name}")%>">
+				<%=presset.name.capitalize%>
+				<span style="margin-left: 20px;"><%=presset.genre%></span>
+			</a>
+		</li>
+	<%end%>
+</ul>

@@ -1,13 +1,14 @@
-//  vars
+//  VARS
 	// $dark-color: #2B2F3B;
 	// $light-color: #b9bdc5;
 	// $green-color: #a6ff4d;
-	$dark-color: #270F56;
-	$light-color: #9C9DBB;
-	$light-drk-color: #676998;
-	$green-color: #4ED592;
-	$green-drk-color: #27a566;
-// -vars
+	$dark-color: #333441;
+	$light-color: #ABAFB7;
+	$light-drk-color: #7C828F;
+	$green-color: #22E88C;
+	$green-drk-color: #2FCE84;
+
+// FONTS
 @font-face{
 	font-family: chunk-five;
 	src: url(/fonts/Chunkfive.otf);
@@ -27,18 +28,22 @@
 	color: black;
 }
 
-
+// TAGS
 body{
 	color: $light-color;
 	background: $dark-color;
 	padding: 0;
 	margin: 0;
 }
+audio{
+	vertical-align: middle;
+}
 a{
 	text-decoration: none;
 	color:inherit;
 }
 
+// MAIN
 .container{
 	padding: 1%;
 	font-size: 20px;
@@ -51,39 +56,46 @@ a{
 	color: $dark-color;
 	padding: 0px 20px;
 	padding-top: 10px;
-}
-#nav-bar>.nav-item{
-	padding-top: 6px;
-	font-size: 20px;
-	display: inline-block;
-}
-.nav-item+.nav-item{padding-left: 100px; }
-.nav-item>.lamp{
-	cursor: pointer;
-	position: relative;
-	bottom: 2px;
-	right: 5px;
-	background: $green-color;
-	height: 10px;
-	width: 10px;
-	border-radius: 50%;
-	display: inline-block;
-}
-#nav-bar>.sign-item{padding-left: 0px;}
-#nav-bar>.sign-item+.sign-item{padding-right: 50px;}
-#nav-bar>.logo{
-	margin-right: 100px;
-	font-size: 27px;
-	width: 150px;
+
+	.nav-item{
+		padding-top: 6px;
+		font-size: 20px;
+		display: inline-block;
+		.lamp{
+			cursor: pointer;
+			position: relative;
+			bottom: 2px;
+			right: 5px;
+			background: $green-color;
+			height: 10px;
+			width: 10px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+		+.nav-item{padding-left: 100px; }
+	}
+
+	.sign-item{
+		padding-left: 50px !important;//overwrites the value from the other class
+	}
+
+	.logo{
+		margin-right: 100px;
+		font-size: 27px;
+		width: 150px;
+	}
 }
 
+// pressets#all
 #presset-name{
 	font-size: 50px;
 }
-
-.keyboard{
-
+.w3-ul{
+	color: inherit;
+	li{border-bottom: 1px solid $light-color};
 }
+
+// presset#show
 .key {
 	margin: 4px 3px;
 	display: inline-block;
@@ -92,22 +104,24 @@ a{
 	background: $light-color;
 	width: 100px;
 	height: 70px;
-}
-.key>.char{
-	font-size: 25px;
-	position: relative;
-	left: 5px;
-	bottom: 2px;
-}
-.key>.sound{
-	margin: auto;
-	display: inline-block;
-	font-size: 23px;
-	position: relative;
-	top:30px;
-}
-.sound>b{
-	margin: auto;
+
+	.char{
+		font-size: 25px;
+		position: relative;
+		left: 5px;
+		bottom: 2px;
+	}
+
+	.sound{
+		margin: auto;
+		display: inline-block;
+		font-size: 23px;
+		position: relative;
+		top:30px;
+		b{
+			margin: auto;
+		}
+	}
 }
 .pressed{
 	border-color: $green-drk-color;
@@ -125,4 +139,16 @@ a{
 	height: 55px;
 	width: 55px;
 	border-radius: 50%;
+	vertical-align: middle;
+	&:hover{ cursor: pointer;}
+}
+.record{
+	audio{margin-right: 10px;}
+	i{
+		margin-left: 10px;
+		&:hover{
+			cursor: pointer;
+			color: #ff0000;
+		}
+	}
 }
