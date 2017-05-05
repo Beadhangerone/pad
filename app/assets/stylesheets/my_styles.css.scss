@@ -1,3 +1,13 @@
+//  vars
+	// $dark-color: #2B2F3B;
+	// $light-color: #b9bdc5;
+	// $green-color: #a6ff4d;
+	$dark-color: #270F56;
+	$light-color: #9C9DBB;
+	$light-drk-color: #676998;
+	$green-color: #4ED592;
+	$green-drk-color: #27a566;
+// -vars
 @font-face{
 	font-family: chunk-five;
 	src: url(/fonts/Chunkfive.otf);
@@ -19,8 +29,8 @@
 
 
 body{
-	color: #b9bdc5;
-	background: #2b2f3b;
+	color: $light-color;
+	background: $dark-color;
 	padding: 0;
 	margin: 0;
 }
@@ -37,8 +47,8 @@ a{
 #nav-bar{
 	font-weight: bold;
 	height: 60px;
-	background: #b9bdc5;
-	color: #2b2f3b;
+	background: $light-color;
+	color: $dark-color;
 	padding: 0px 20px;
 	padding-top: 10px;
 }
@@ -53,10 +63,10 @@ a{
 	position: relative;
 	bottom: 2px;
 	right: 5px;
-	background: #a6ff4d;
+	background: $green-color;
 	height: 10px;
 	width: 10px;
-	border-radius: 50px;
+	border-radius: 50%;
 	display: inline-block;
 }
 #nav-bar>.sign-item{padding-left: 0px;}
@@ -69,7 +79,6 @@ a{
 
 #presset-name{
 	font-size: 50px;
-	color: #b9bdc5;
 }
 
 .keyboard{
@@ -78,9 +87,9 @@ a{
 .key {
 	margin: 4px 3px;
 	display: inline-block;
-	border: 5px solid #6b717b;
+	border: 5px solid $light-drk-color;
 	border-radius: 3px;
-	background: #b9bdc5;
+	background: $light-color;
 	width: 100px;
 	height: 70px;
 }
@@ -101,8 +110,8 @@ a{
 	margin: auto;
 }
 .pressed{
-	border-color: #59a50d;
-	background: #a6ff4d;
+	border-color: $green-drk-color;
+	background: $green-color;
 	color: #4d4d4d;
 /*	-webkit-box-shadow: inset 0px 0px 50px 14px rgba(0,0,0,0.3);
 	-moz-box-shadow: inset 0px 0px 50px 14px rgba(0,0,0,0.3);
@@ -110,4 +119,10 @@ a{
 }
 .offset{
 	display: inline-block;
+}
+.rec-btn{
+	font-size: 15px;
+	height: 55px;
+	width: 55px;
+	border-radius: 50%;
 }

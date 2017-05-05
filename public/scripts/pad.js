@@ -5,6 +5,7 @@ $(document).ready(function() {
 			constructor(audio){
 				var btn = $('<button>')
 				btn.data('rec', false)
+				btn.addClass('rec-btn')
 				if(audio){
 					btn.html('REC on it')
 					audCtx.createMediaElementSource(audio).connect(mainNode)//connect sound for rec it
@@ -81,14 +82,14 @@ $(document).ready(function() {
 		);
 	})
 // ------_INIT DB--------
+	var reclist = $('#reclist')
+	reclist.children().remove()
 	if (!window.audCtx){window.audCtx = new AudioContext()}
 	var sounds = parseSounds(audios)
 	var mainNode = audCtx.createGain()
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
 	var rec = new Recorder(mainNode)
-	var reclist = $('#reclist')
-	reclist.innerHTML = ''
 	var mainRec = new RecBtn()
 	reclist.append(mainRec)
 	getStoredRecs()
