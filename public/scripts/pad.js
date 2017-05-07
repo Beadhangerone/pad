@@ -2,9 +2,10 @@ var clog=(x)=>console.log(x)
 $(document).ready(function() {
 //------------CLASSES-----------------------
 		class RecBtn{
-			constructor(audio){
+			constructor(audio, parent = 'root'){
 				var btn = $('<button>')
 				btn.data('rec', false)
+				btn.data('parent', parent)
 				btn.addClass('rec-btn')
 				if(audio){
 					btn.html('REC on it')
@@ -54,20 +55,24 @@ $(document).ready(function() {
 		}
 
 		class Record{
-			constructor(id, blob){
+			constructor(id, blob, parent){
 				this.id = id
 				this.blob = blob
+				this.parent = parent
 			}
 			pushRec(){
-				var div = $('<div>')
-				div.addClass('record')
+				var li = $('<li>')
+				var div = $('<div class="record">')
 				var audio = new Aud(this.blob)
-				var roib = new RecBtn(audio)
+				var roib = new RecBtn(audio, this.id)
 				var delb = new Delb(this.id, div)
-				$(div).append(audio)
-				$(div).append(roib)
-				$(div).append(delb)
-				reclist.append( div )
+				div.append(audio)
+				div.append(roib)
+				div.append(delb)
+				li.append(div)
+				li.append($('<ul id='+this.id+'>'))
+				var parrent_ul = reclist.find('ul#'+this.parent)
+				parrent_ul.append( li )
 			}
 		}
 //------------_CLASSES-----------------------
@@ -76,33 +81,39 @@ $(document).ready(function() {
 // -------INIT DB--------
 	db = openDatabase("Recs", "0.1", "Records", 200000);
 	if(!db){alert("Failed to connect to database. Try to refresh the page.");}
+	db.transaction(function (tx) {
+  	tx.executeSql('DROP TABLE Records');
+	});
 	db.transaction(function(tx){
 		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS Records (id INTEGER PRIMARY KEY, sound TEXT)", [],
+			"CREATE TABLE IF NOT EXISTS Records (id INTEGER PRIMARY KEY, sound TEXT, parent TEXT)", [],
 			null,null
 		);
 	})
 // ------_INIT DB--------
-	var reclist = $('#reclist')
-	reclist.children().remove()
 	if (!window.audCtx){window.audCtx = new AudioContext()}
 	var sounds = parseSounds(audios)
 	var mainNode = audCtx.createGain()
 	mainNode.connect(audCtx.destination)
 	var nodes = setNodes()
 	var rec = new Recorder(mainNode)
+
+	var reclist = $('#reclist')
+	reclist.children().remove()
+	reclist.append( $("<ul id='root'>") )
+	var main_rec = $('#main-rec')
 	var mainRec = new RecBtn()
-	reclist.append(mainRec)
+	main_rec.append(mainRec)
 	getStoredRecs()
 //-----------_INIT-----------------------
 
 // -------DB FUNCTIONS--------
-		function blobToBase64(blob){
+		function blobToBase64(blob, callback){
 			var reader = new window.FileReader();
 			reader.onloadend = function() {
 				var res = reader.result
 				var res = res.substr(res.indexOf(',')+1)
-				pushRecToDB(res)
+				callback(res)
 			}
 			reader.readAsDataURL(blob);
 		}
@@ -125,8 +136,9 @@ $(document).ready(function() {
 						for(var i = 0; i < result.rows.length; i++) {
 							var id = result.rows.item(i)['id']
 							var b64 = result.rows.item(i)['sound']
+							var parent = result.rows.item(i)['parent']
 							var blob = base64ToBlob(b64)
-							var rec = new Record(id, blob)
+							var rec = new Record(id, blob, parent)
 							rec.pushRec()
 						}
 					},
@@ -134,17 +146,19 @@ $(document).ready(function() {
 				);
 			});
 		}
-		function pushRecToDB(data){
+		function pushRecToDB(b64, parent){
 			db.transaction(function(tx) {
 				tx.executeSql(
-					"INSERT INTO Records (sound) values(?)", [data],
+					"INSERT INTO Records (sound, parent) values(?, ?)", [b64, parent],
 					function(tx, results){
                 var id = results.insertId
-								var blob = base64ToBlob(data)
-								var rec = new Record(id, blob)
+								var blob = base64ToBlob(b64)
+								var rec = new Record(id, blob, parent)
 								rec.pushRec()
             },
-						null
+						function errorHandler(tx, error) {
+						    alert("Error : " + error.message);
+						}
 				);
 			});
 		}
@@ -184,7 +198,9 @@ $(document).ready(function() {
 	}
 	function stopRec(btn){
 		rec.stop()
-		downloadLink()
+		rec.exportWAV(function(blob) {
+			blobToBase64(blob, function(b64){pushRecToDB(b64, btn.data('parent'))});
+		});
 		btn.data('rec', false)
 		btn.css('color', 'black')
 	}
@@ -196,11 +212,11 @@ $(document).ready(function() {
 			DBdelRec(id)
 		}
 	}
-	function downloadLink(){
-		rec.exportWAV(function(blob) {
-			blobToBase64(blob)
-		});
-	}
+	// function downloadLink(){
+	// 	rec.exportWAV(function(blob) {
+	// 		blobToBase64(blob)
+	// 	});
+	// }
 
 	$("body").on("keydown", function(e) {
 		var index = e.which

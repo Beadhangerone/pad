@@ -97,13 +97,13 @@ a{
 
 // presset#show
 .key {
-	margin: 4px 3px;
+	margin: 0.5% 0.2%;
 	display: inline-block;
 	border: 5px solid $light-drk-color;
 	border-radius: 3px;
 	background: $light-color;
-	width: 100px;
-	height: 70px;
+	width: 9%;
+	height: 80px;
 
 	.char{
 		font-size: 25px;
@@ -135,6 +135,8 @@ a{
 	display: inline-block;
 }
 .rec-btn{
+	background: $light-color;
+	color: $dark-color;
 	font-size: 15px;
 	height: 55px;
 	width: 55px;

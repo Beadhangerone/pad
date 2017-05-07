@@ -1,11 +1,13 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
 <script>window.audios = <%=raw @audios.to_json%></script>
-<script src="/scripts/pad.js"></script>
 <center><span id="presset-name"><%=@presset.name%></span></center><br>
 
 <div class="black-text-color keyboard">
 	<%$keys.each do |wich, key|%>
-		<%if key=='a'%><div class='offset' style="width: 30px;"></div><%end%>
-		<%if key=='z'%><div class='offset' style="width: 60px;"></div><%end%>
+		<%if key=='a'%><div class='offset' style="width: 40px;"></div><%end%>
+		<%if key=='z'%><div class='offset' style="width: 80px;"></div><%end%>
 		<div class="key" data-key='<%=wich%>'>
 			<span class="chunk char"><%=key.capitalize%></span>
 			<%@presset.sounds.each do |s|%>
@@ -19,4 +21,6 @@
 		<%end%>
 	<%end%>
 </div>
+<div id="main-rec"></div>
 <div id="reclist"></div>
+<script src="/scripts/pad.js"></script>
