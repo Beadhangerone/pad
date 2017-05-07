@@ -4,6 +4,7 @@ class RecBtn{
     btn.data('rec', false)
     btn.data('parent', parent)
     if(audio){
+      btn.addClass('roib')
       btn.html('REC on it')
       audCtx.createMediaElementSource(audio).connect(mainNode)//connect sound for rec it
       btn.on('click', function(){
@@ -40,9 +41,9 @@ class Aud{
   }
 }
 class Delb{
-  constructor(id, li){
+  constructor(id, el){
     var delb = $('<i class="fa fa-times">')
-    delb.on('click', {id:id, li:li}, delRec)
+    delb.on('click', {id:id, el:el}, delRec)
    return delb
   }
 }
@@ -58,7 +59,7 @@ class Record{
     var div = $('<div class="record">')
     var audio = new Aud(this.blob)
     var roib = new RecBtn(audio, this.id)
-    var delb = new Delb(this.id, li)
+    var delb = new Delb(this.id, div)
     div.append(audio)
     div.append(roib)
     div.append(delb)

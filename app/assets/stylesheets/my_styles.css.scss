@@ -144,13 +144,24 @@ a{
 	vertical-align: middle;
 	&:hover{ cursor: pointer;}
 }
-.record{
-	audio{margin-right: 10px;}
-	i{
-		margin-left: 10px;
-		&:hover{
-			cursor: pointer;
-			color: #ff0000;
+.roib{
+	width: 35px;
+  height: 35px;
+  font-size: 10px;
+  line-height: initial;
+}
+#reclist{
+	ul{list-style: none}
+	.record{
+		margin-bottom: 5px;
+		audio{margin-right: 10px;}
+		i{
+			margin-left: 6px;
+			&:hover{
+				cursor: pointer;
+				color: #ff0000;
+			}
 		}
 	}
+
 }

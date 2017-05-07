@@ -43,6 +43,7 @@ $(document).ready(function() {
 			});
 		}
 		function pushRecToDB(b64, parent){
+      parent = `${parent}`
 			db.transaction(function(tx) {
 				tx.executeSql(
 					"INSERT INTO Records (sound, parent) values(?, ?)", [b64, parent],
@@ -84,8 +85,8 @@ $(document).ready(function() {
 	window.delRec=function(e){
 		if( confirm("Do You really want to delete this record?") ){
 			var id = e.data.id
-			var li = e.data.li
-			li.remove()
+			var el = e.data.el
+			el.remove()
 			DBdelRec(id)
 		}
 	}
