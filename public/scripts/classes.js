@@ -1,71 +1,86 @@
-class RecBtn{
-  constructor(audio, parent = 'root'){
-    var btn = $('<button class="rec-btn">')
-    btn.data('rec', false)
-    btn.data('parent', parent)
-    if(audio){
-      btn.addClass('roib')
-      btn.html('REC on it')
-      audCtx.createMediaElementSource(audio).connect(mainNode)//connect sound for rec it
-      btn.on('click', function(){
-        var rec = $(this).data('rec')
-        if(!rec){
-          audio.currentTime = 0
-          audio.play()
-          startRec($(this))
-        }else if(rec){
-          stopRec($(this))
-          audio.pause()
-          audio.currentTime = 0
-        }
-      });
-    }else if(!audio){
-      btn.html('REC')
-      btn.on('click', function(){
-        var rec = $(this).data('rec')
-        if(!rec){
-          startRec($(this))
-        }else if(rec){
-          stopRec($(this))
-        }
-      });
+  class RecBtn{
+    constructor(target, audio, parent = 'root'){
+      var btn = $('<button class="rec-btn">')
+      btn.data('rec', false)
+      btn.data('parent', parent)
+      if(audio){
+        btn.html('REC on it')
+        btn.addClass('roib')
+        target.append(btn)
+        btn.on('click', function(){
+          var rec = $(this).data('rec')
+          if(!rec){
+            audCtx.createMediaElementSource(audio).connect(mainNode)//connect sound for rec it
+            audio.currentTime = 0
+            audio.play()
+            startRec($(this))
+          }else if(rec){
+            stopRec($(this))
+            audio.pause()
+            audio.currentTime = 0
+          }
+        });
+      }else if(!audio){
+        btn.html('REC')
+        target.append(btn)
+        btn.on('click', function(){
+          var rec = $(this).data('rec')
+          if(!rec){
+            startRec($(this))
+          }else if(rec){
+            stopRec($(this))
+          }
+        });
+      }
+      return btn
     }
-    return btn
-  }
-}
-class Aud{
-  constructor(blob,controls=true){
-    var audio = $('<audio controls>')
-    audio.attr('src', window.URL.createObjectURL(blob) )
-    return audio[0]
-  }
-}
-class Delb{
-  constructor(id, el){
-    var delb = $('<i class="fa fa-times">')
-    delb.on('click', {id:id, el:el}, delRec)
-   return delb
-  }
 }
 
-class Record{
-  constructor(id, blob, parent){
-    this.id = id
-    this.blob = blob
-    this.parent = parent
+  class Aud{
+    constructor(target, blob, controls=true){
+      var audio = $('<audio controls>')
+      audio.attr('src', window.URL.createObjectURL(blob) )
+      target.append(audio[0])
+      return audio[0]
+    }
   }
-  pushRec(){
-    var li = $('<li id='+this.id+'>')
-    var div = $('<div class="record">')
-    var audio = new Aud(this.blob)
-    var roib = new RecBtn(audio, this.id)
-    var delb = new Delb(this.id, div)
-    div.append(audio)
-    div.append(roib)
-    div.append(delb)
-    li.append(div)
-    li.append($('<ul id='+this.id+'>'))
-    var parrent_ul = reclist.find('ul#'+this.parent)
-    parrent_ul.append( li )
+  class Dowb{
+    constructor(target, blob){
+      this.blob = blob
+      var url = URL.createObjectURL(blob)//try to do it faster
+      var link = $('<a>')
+      link.attr('href', url)
+      link.attr('download', new Date().toISOString() + '.wav')
+      link.html("Download")
+      target.append(link)
+      return link
+    }
   }
-}
+  class Delb{
+    constructor(target, id){
+      var delb = $('<i class="fa fa-times">')
+      target.append(delb)
+      delb.on('click', {id:id, el:target}, delRec)
+     return delb
+    }
+  }
+
+  class Record{
+    constructor(id, blob, parent){
+      this.id = id
+      this.blob = blob
+      this.parent = parent
+    }
+    pushRec(){
+      var parrent_ul = reclist.find('ul#'+this.parent)
+      var li = $('<li id='+this.id+'>')
+      parrent_ul.append( li )
+      var div = $('<div class="record">')
+      li.append(div)
+      var audio = new Aud(div, this.blob)
+      var roib = new RecBtn(div, audio, this.id)
+      var dowb = new Dowb(div, this.blob)
+      var delb = new Delb(div, this.id)
+      li.append($('<ul id='+this.id+'>'))
+    }
+  }

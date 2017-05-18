@@ -283,10 +283,13 @@ var Recorder = exports.Recorder = (function () {
         key: 'forceDownload',
         value: function forceDownload(blob, filename) {
             var url = (window.URL || window.webkitURL).createObjectURL(blob);
+            console.log(blob);
+            console.log(url);
             var link = window.document.createElement('a');
             link.href = url;
             link.download = filename || 'output.wav';
-            var click = document.createEvent("Event");
+            console.log(link);
+            document.createEvent("Event");
             click.initEvent("click", true, true);
             link.dispatchEvent(click);
         }

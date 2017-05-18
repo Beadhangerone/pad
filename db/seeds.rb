@@ -69,6 +69,16 @@ pressets = {
 		wi('x') => '/sounds/wox/riff.wav',
 		# wi('') => '/sounds/wox/riff2.wav',
 	},
+	'808' => {
+		wi('m') => '/sounds/808/Kick.wav',
+		wi('j') => '/sounds/808/Swing.wav',
+		wi('o') => '/sounds/808/Snare.wav',
+		wi('k') => '/sounds/808/Scratch.wav',
+		wi('c') => '/sounds/808/808_1.wav',
+		wi('d') => '/sounds/808/808_2.wav',
+		wi('e') => '/sounds/808/808_3.wav',
+		wi('v') => '/sounds/808/transition.wav',
+	},
 
 }
 

@@ -26,6 +26,8 @@ $(document).ready(function() {
 // -------DB FUNCTIONS--------
 		function getStoredRecs(){
 			db.transaction(function(tx) {
+        reclist.children().remove()
+        reclist.append( $("<ul id='root'>") )
 				tx.executeSql(
 					"SELECT * FROM Records", [],
 					function(tx, result) {
@@ -37,6 +39,7 @@ $(document).ready(function() {
 							var rec = new Record(id, blob, parent)
 							rec.pushRec()
 						}
+
 					},
 					null
 				);
