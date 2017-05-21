@@ -34,7 +34,7 @@
           <a href="<%=destroy_user_session_path%>" data-method="delete">Sign out</a>
         </div>
         <div class="sign-item nav-item w3-right">
-            <%=current_user.username%>
+            <a href="<%=profile_path%>"><%=current_user.username%></a> 
         </div>
       <%else%>
         <div class="sign-item nav-item w3-right">

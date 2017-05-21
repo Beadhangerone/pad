@@ -20,7 +20,7 @@ $(document).ready(function() {
 				byteNumbers[i] = byteCharacters.charCodeAt(i);
 			}
 			var byteArray = new Uint8Array(byteNumbers);
-			var blob = new Blob([byteArray], {type: 'audio/waw'});
+			var blob = new Blob([byteArray], {type: 'audio/mpeg'});
 			return blob
 		}
 // -------DB FUNCTIONS--------

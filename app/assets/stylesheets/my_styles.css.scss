@@ -43,7 +43,22 @@ a{
 	color:inherit;
 }
 
+
+.aud-chevron{
+	line-height: 32px;
+	position: relative;
+	top: 2px;
+	background: #FAFAFF;
+	color: #5A5A5A;
+	margin-left: 2px;
+	padding: 0 4px;
+}
+
+
+
 // MAIN
+.notice{color: $green-color}
+.alert{color:red}
 .container{
 	padding: 1%;
 	font-size: 20px;
@@ -57,21 +72,21 @@ a{
 	padding: 0px 20px;
 	padding-top: 10px;
 
+	.lamp{
+		cursor: pointer;
+		position: relative;
+		bottom: 2px;
+		right: 5px;
+		background: $green-color;
+		height: 10px;
+		width: 10px;
+		border-radius: 50%;
+		display: inline-block;
+	}
 	.nav-item{
 		padding-top: 6px;
 		font-size: 20px;
 		display: inline-block;
-		.lamp{
-			cursor: pointer;
-			position: relative;
-			bottom: 2px;
-			right: 5px;
-			background: $green-color;
-			height: 10px;
-			width: 10px;
-			border-radius: 50%;
-			display: inline-block;
-		}
 		+.nav-item{padding-left: 100px; }
 	}
 

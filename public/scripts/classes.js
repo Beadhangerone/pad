@@ -1,3 +1,6 @@
+// Create addons for each record, get all the data for addons from data-attrs
+
+
   class RecBtn{
     constructor(target, audio, parent = 'root'){
       var btn = $('<button class="rec-btn">')
@@ -50,7 +53,7 @@
       var url = URL.createObjectURL(blob)//try to do it faster
       var link = $('<a>')
       link.attr('href', url)
-      link.attr('download', new Date().toISOString() + '.wav')
+      link.attr('download', new Date().toISOString() + '.mp3')
       link.html("Download")
       target.append(link)
       return link
