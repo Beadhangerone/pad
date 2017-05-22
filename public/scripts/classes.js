@@ -54,14 +54,15 @@
       var link = $('<a>')
       link.attr('href', url)
       link.attr('download', new Date().toISOString() + '.mp3')
-      link.html("Download")
+      var icon = $('<i class="fa fa-download dowb">')
+      link.append(icon)
       target.append(link)
       return link
     }
   }
   class Delb{
     constructor(target, id){
-      var delb = $('<i class="fa fa-times">')
+      var delb = $('<i class="fa fa-times delb">')
       target.append(delb)
       delb.on('click', {id:id, el:target}, delRec)
      return delb

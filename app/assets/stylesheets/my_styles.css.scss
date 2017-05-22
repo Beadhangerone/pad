@@ -162,7 +162,11 @@ a{
 	width: 55px;
 	border-radius: 50%;
 	vertical-align: middle;
-	&:hover{ cursor: pointer;}
+	&:hover{
+		cursor: pointer;
+		background: $light-drk-color;
+		border-color: $light-drk-color;
+	}
 }
 .roib{
 	width: 35px;
@@ -179,7 +183,7 @@ a{
 			margin-left: 6px;
 			&:hover{
 				cursor: pointer;
-				color: #ff0000;
+				color: $light-drk-color;
 			}
 		}
 	}
