@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Pad</title>
+    <!-- animate css -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!-- w3css -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -26,7 +28,7 @@
           <div class="lamp"></div><a href="<%=all_pressets_path%>">Pressets</a>
       </div>
       <div class="nav-item w3-left">
-          <div class="lamp"></div><a href="/#">Songs</a>
+          <div class="lamp"></div><a href="<%=songs_path%>">Songs</a>
       </div>
       <%if user_signed_in?%>
         <div class="sign-item nav-item w3-right">
@@ -34,7 +36,7 @@
           <a href="<%=destroy_user_session_path%>" data-method="delete">Sign out</a>
         </div>
         <div class="sign-item nav-item w3-right">
-            <a href="<%=profile_path%>"><%=current_user.username%></a> 
+            <a href="<%=profile_path%>"><%=current_user.username%></a>
         </div>
       <%else%>
         <div class="sign-item nav-item w3-right">

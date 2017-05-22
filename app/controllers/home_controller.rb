@@ -4,6 +4,9 @@ class HomeController < ApplicationController
 	def index
 	end
 
+	def songs
+	end
+
 	# private
 	# def check_if_presset
 	# 	presset = params[:presset]
