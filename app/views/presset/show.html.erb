@@ -18,7 +18,18 @@
 		<%end%>
 	<%end%>
 </div>
-<div id="main-rec"></div><span id="try" style='color:#4285F4'><i class="animated infinite pulse fa fa-hand-o-up" aria-hidden="true"></i> Try to record yourself</span>
+<div>
+	<form id='save-song-form' action="<%=song_create_path%>" method="post">
+		<input name='song[name]' type="text">
+		<input name='song[b64]' type="hidden">
+		<input type="submit">
+	</form>
+</div>
+<div id="main-rec"></div>
+<span id="try" style='color:#4285F4'>
+		<i class="animated infinite pulse fa fa-hand-o-up" aria-hidden="true"></i>
+		Try to record yourself
+</span>
 <div id="reclist">
 	<ul id='root'></ul>
 </div>

@@ -1,28 +1,27 @@
-var clog=(x)=>console.log(x)
+// ----CONVERTION-----
+  window.blobToBase64 = function(blob, callback){
+    var reader = new window.FileReader();
+    reader.onloadend = function() {
+      var res = reader.result
+      res = res.substr(res.indexOf(',')+1)
+      callback(res)
+    }
+    reader.readAsDataURL(blob);
+  }
+  window.base64ToBlob = function(b64Data){
+    var byteCharacters = atob(b64Data);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    var blob = new Blob([byteArray], {type: 'audio/mpeg'});
+    return blob
+  }
 $(document).ready(function() {
 // ----MAIN------
   getStoredRecs()
 
-// ----CONVERTION-----
-		function blobToBase64(blob, callback){
-			var reader = new window.FileReader();
-			reader.onloadend = function() {
-				var res = reader.result
-				var res = res.substr(res.indexOf(',')+1)
-				callback(res)
-			}
-			reader.readAsDataURL(blob);
-		}
-		function base64ToBlob(b64Data){
-			var byteCharacters = atob(b64Data);
-			var byteNumbers = new Array(byteCharacters.length);
-			for (var i = 0; i < byteCharacters.length; i++) {
-				byteNumbers[i] = byteCharacters.charCodeAt(i);
-			}
-			var byteArray = new Uint8Array(byteNumbers);
-			var blob = new Blob([byteArray], {type: 'audio/mpeg'});
-			return blob
-		}
 // -------DB FUNCTIONS--------
 		function getStoredRecs(){
 			db.transaction(function(tx) {
@@ -35,8 +34,7 @@ $(document).ready(function() {
 							var id = result.rows.item(i)['id']
 							var b64 = result.rows.item(i)['sound']
 							var parent = result.rows.item(i)['parent']
-							var blob = base64ToBlob(b64)
-							var rec = new Record(id, blob, parent)
+							var rec = new Record(id, b64, parent)
 							rec.pushRec()
 						}
 
@@ -52,8 +50,7 @@ $(document).ready(function() {
 					"INSERT INTO Records (sound, parent) values(?, ?)", [b64, parent],
 					function(tx, results){
                 var id = results.insertId
-								var blob = base64ToBlob(b64)
-								var rec = new Record(id, blob, parent)
+								var rec = new Record(id, b64, parent)
 								rec.pushRec()
             },
 						function errorHandler(tx, error) {

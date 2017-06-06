@@ -1,5 +1,21 @@
 // Create addons for each record, get all the data for addons from data-attrs
 
+  class SaveBtn{
+    constructor(target, b64){
+      this.b64 = b64
+      var svBtn = $('<button>')
+      svBtn.addClass('sv-btn')
+      svBtn.html('Save')
+      target.append(svBtn)
+      // debugger
+      var _this = this
+      svBtn.on('click', function(){
+        $('#save-song-form > input[name="song[b64]"]')[0].value = _this.b64
+        console.log('done');
+      });
+      return svBtn
+    }
+  }
 
   class RecBtn{
     constructor(target, audio, parent = 'root'){
@@ -70,9 +86,10 @@
   }
 
   class Record{
-    constructor(id, blob, parent){
+    constructor(id, b64, parent){
       this.id = id
-      this.blob = blob
+      this.b64 = b64
+      this.blob = base64ToBlob(b64)
       this.parent = parent
     }
     pushRec(){
@@ -81,10 +98,11 @@
       parrent_ul.append( li )
       var div = $('<div class="record">')
       li.append(div)
+      new SaveBtn(div, this.b64)
       var audio = new Aud(div, this.blob)
-      var roib = new RecBtn(div, audio, this.id)
-      var dowb = new Dowb(div, this.blob)
-      var delb = new Delb(div, this.id)
+      new RecBtn(div, audio, this.id)
+      new Dowb(div, this.blob)
+      new Delb(div, this.id)
       li.append($('<ul id='+this.id+'>'))
     }
   }

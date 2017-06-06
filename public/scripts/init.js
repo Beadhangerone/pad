@@ -42,4 +42,30 @@ $(document).ready(function(){
   mainRec = new RecBtn(main_rec)
   window.reclist = $('#reclist')
 
+  // post songs
+  // document.getElementsByClassName('save-song-btn').onclick = function(){
+  //   // get b64
+  //     db.transaction(function(tx){
+  //       tx.executeSql(
+  //         "SELECT * FROM Records", [],
+  //         function(tx, result) {
+  //           for(var i = 0; i < result.rows.length; i++) {
+  //             if(result.rows.item(i)['id'] == 1){//here must be the param
+  //               document.querySelector('#save-song-form > input[name="song[b64]"]').value = result.rows.item(i)['sound']
+  //               console.log(document.querySelector('#save-song-form > input[name="song[b64]"]').value == result.rows.item(i)['sound']);
+  //             }
+  //           }
+  //         },
+  //         null
+  //       );
+  //     });
+      // show a form
+
+
+    // send a xhr to ruby defined URL, with b64 in params
+    // var xhr = new XHRHttpRequest()
+    //
+    // xhr.open('', )
+
+  // }
 })
